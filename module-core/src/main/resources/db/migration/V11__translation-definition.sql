@@ -1,4 +1,4 @@
-CREATE SEQUENCE translation_definition_seq INCREMENT BY 50 START WITH 1;
+-- CREATE SEQUENCE translation_definition_seq INCREMENT BY 50 START WITH 1;
 
 CREATE TABLE translation_definition
 (

@@ -1,3 +1,5 @@
+SET FOREIGN_KEY_CHECKS = 0;
+
 DROP TABLE IF EXISTS field_definition_seq;
 
 DROP TABLE IF EXISTS field_instance_seq;
@@ -52,3 +54,5 @@ ALTER TABLE vocabulary_record
 
 ALTER TABLE vocabulary_schema
     MODIFY id BIGINT AUTO_INCREMENT;
+
+SET FOREIGN_KEY_CHECKS = 1;

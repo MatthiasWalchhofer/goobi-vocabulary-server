@@ -11,4 +11,4 @@ ALTER TABLE field_type
 DROP
 COLUMN validation_id;
 
-DROP SEQUENCE field_validation_seq;
+-- DROP SEQUENCE field_validation_seq;

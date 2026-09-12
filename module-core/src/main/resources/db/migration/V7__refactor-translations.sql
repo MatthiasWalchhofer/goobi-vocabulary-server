@@ -6,7 +6,7 @@ ALTER TABLE field_value_translation_mapping
 DROP
 FOREIGN KEY fk_field_value_translation_mapping_on_language;
 
-CREATE SEQUENCE field_translation_seq INCREMENT BY 50 START WITH 1;
+-- CREATE SEQUENCE field_translation_seq INCREMENT BY 50 START WITH 1;
 
 CREATE TABLE field_translation
 (
