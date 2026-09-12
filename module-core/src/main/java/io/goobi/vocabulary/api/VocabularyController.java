@@ -35,6 +35,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -110,7 +111,7 @@ public class VocabularyController {
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType("application/octet-stream"))
                 .header("Content-disposition", "attachment; filename=\"vocabulary_" + id + ".json\"")
-                .body(IOUtils.toByteArray(jsonMapper.toJson(vocabularyRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Vocabulary.class, id)))));
+                .body(jsonMapper.toJson(vocabularyRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Vocabulary.class, id))).getBytes(StandardCharsets.UTF_8));
     }
 
     @PutMapping(
@@ -136,7 +137,7 @@ public class VocabularyController {
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType("application/octet-stream"))
                 .header("Content-disposition", "attachment; filename=\"vocabulary_" + id + ".csv\"")
-                .body(IOUtils.toByteArray(csvMapper.toCSV(vocabularyRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Vocabulary.class, id)))));
+                .body(csvMapper.toCSV(vocabularyRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Vocabulary.class, id))).getBytes(StandardCharsets.UTF_8));
     }
 
     @PutMapping(
@@ -178,7 +179,7 @@ public class VocabularyController {
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType("application/octet-stream"))
                 .header("Content-disposition", "attachment; filename=\"vocabulary_" + id + ".rdf\"")
-                .body(IOUtils.toByteArray(rdfMapper.toRDFXML(vocabularyRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Vocabulary.class, id)))));
+                .body(rdfMapper.toRDFXML(vocabularyRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Vocabulary.class, id))).getBytes(StandardCharsets.UTF_8));
     }
 
     @GetMapping(
@@ -189,6 +190,6 @@ public class VocabularyController {
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType("application/octet-stream"))
                 .header("Content-disposition", "attachment; filename=\"vocabulary_" + id + ".ttl\"")
-                .body(IOUtils.toByteArray(rdfMapper.toRDFTurtle(vocabularyRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Vocabulary.class, id)))));
+                .body(rdfMapper.toRDFTurtle(vocabularyRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Vocabulary.class, id))).getBytes(StandardCharsets.UTF_8));
     }
 }

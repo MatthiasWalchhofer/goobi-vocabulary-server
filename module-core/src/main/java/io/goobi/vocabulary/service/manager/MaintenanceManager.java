@@ -1,6 +1,7 @@
 package io.goobi.vocabulary.service.manager;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.ObjectMapper;
 import io.goobi.vocabulary.exception.VocabularyException;
 import io.goobi.vocabulary.monitoring.FlywayInformation;
 import io.goobi.vocabulary.service.maintenance.VersionInformation;
@@ -129,7 +130,7 @@ public class MaintenanceManager {
     private void saveSelfCheckResult(SelfCheckResult result) {
         try {
             objectMapper.writeValue(SELF_CHECK_CACHE_FILE, result);
-        } catch (IOException e) {
+        } catch (JacksonException e) {
             log.error("Error saving self-check result", e);
         }
     }
@@ -140,7 +141,7 @@ public class MaintenanceManager {
         }
         try {
             return Optional.of(objectMapper.readValue(MaintenanceManager.SELF_CHECK_CACHE_FILE, SelfCheckResult.class));
-        } catch (IOException e) {
+        } catch (JacksonException e) {
             log.error("Error reading cached self-check results", e);
             return Optional.empty();
         }
